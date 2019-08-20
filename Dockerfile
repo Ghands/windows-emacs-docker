@@ -2,6 +2,7 @@ FROM ubuntu:18.04
 LABEL maintainer="Windows docker emacs client <623482199@qq.com>"
 LABEL version="0.0.1"
 
+ENV DEBIAN_FRONTEND noninteractive
 ENV LANG C.UTF-8
 
 RUN rm -rf /etc/apt/sources.list
@@ -15,17 +16,17 @@ COPY ./badproxy /etc/apt/apt.conf.d/99fixbadproxy
 
 RUN apt-get clean \
     && apt-get update -y \
-    && apt-get install emacs hunspell git texlive-full wget curl evince net-tools \
+    && apt-get install emacs git hunspell wget curl evince net-tools \
     ttf-wqy-zenhei ttf-wqy-microhei fonts-arphic-ukai fonts-arphic-uming -y
     
-RUN yes | apt-get install ttf-mscorefonts-installer -y
+RUN echo "yes" | apt-get install ttf-mscorefonts-installer -y
+RUN echo "70" | echo "6" | apt-get install texlive-full -y
 
 ADD hunspell-dict.tar.gz /usr/share/hunspell
 
 RUN wget https://github.com/jgm/pandoc/releases/download/2.7.3/pandoc-2.7.3-1-amd64.deb \
     && dpkg -i pandoc-2.7.3-1-amd64.deb && rm -f pandoc-2.7.3-1-amd64.deb
 
-RUN mkdir ~/.emacs.d/
-ADD init.el ~/.emacs.d/
+WORKDIR /root
 
-CMD ["emacs", "--display"]
+ENTRYPOINT ["emacs", "--display"]

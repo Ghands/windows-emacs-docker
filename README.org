@@ -1,0 +1,26 @@
+#+TITLE: Windows Emacs Image for Ph.D major in Deep Learning
+#+AUTHOR: Ghands
+#+OPTIONS: ^:{}
+
+The experience of Emacs in Windows is not nice enough compared with it in Linux or MacOS. Many users have to work under Windows because of the need of word. I have created this image for those want to use Emacs like in Linux.
+
+* Pre-requirements
+
+The base requirements is listed below:
+- Windows 10 with hyper-V enabled.
+- Docker
+
+If you want to use Emacs with X windows, you also need install:
+- VcXsrv
+
+* Usage
+
+If you want to use Emacs with X windows, please start VcXsrv first please, remember you need to start with choice "Disable access control" enabled.
+
+#+BEGIN_SRC shell
+docker run --rm -v /path/to/your/shared/driver:/path/you/want/to/mount -it windows-emacs emacs --display xxx.xxx.xxx.xxx:0.0
+#+END_SRC
+
+You need mount your shared drivers to docker container so that you can edit your files effectively, or you cannot access your files in local drivers from docker containers, any changes you make will disappear when you start this container next time. =-v /path/to/your/shared/driver:/path/you/want/to/mount= is the command of mount. If you want to mount more shared drivers, you just need to add another =-v= option and value. I really recommend you mount at least two shared drivers, one for =~/.emacs.d/= , and another for data storage.
+
+The parameter and value =--display xxx.xxx.xxx.xxx:0.0= can start Emacs with X windows, the former half part should be replaced with your IP.
