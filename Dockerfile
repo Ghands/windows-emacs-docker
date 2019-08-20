@@ -15,7 +15,7 @@ COPY ./badproxy /etc/apt/apt.conf.d/99fixbadproxy
 
 RUN apt-get clean \
     && apt-get update -y \
-    && apt-get install emacs hunspell git texlive-full wget curl evince \
+    && apt-get install emacs hunspell git texlive-full wget curl evince net-tools \
     ttf-wqy-zenhei ttf-wqy-microhei fonts-arphic-ukai fonts-arphic-uming -y
     
 RUN yes | apt-get install ttf-mscorefonts-installer -y
