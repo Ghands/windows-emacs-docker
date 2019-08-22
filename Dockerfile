@@ -16,9 +16,12 @@ COPY ./badproxy /etc/apt/apt.conf.d/99fixbadproxy
 
 RUN apt-get clean \
     && apt-get update -y \
-    && apt-get install emacs git hunspell wget curl evince net-tools \
+    && apt-get install emacs git python3-pip hunspell wget curl evince net-tools \
     ttf-wqy-zenhei ttf-wqy-microhei fonts-arphic-ukai fonts-arphic-uming -y
     
+RUN pip3 install virtualenv
+RUN pip3 install flake8
+
 RUN echo "yes" | apt-get install ttf-mscorefonts-installer -y
 RUN echo "70" | echo "6" | apt-get install texlive-full -y
 
