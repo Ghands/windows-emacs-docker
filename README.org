@@ -24,3 +24,7 @@ docker run --rm -v /path/to/your/shared/driver:/path/you/want/to/mount -it windo
 You need mount your shared drivers to docker container so that you can edit your files effectively, or you cannot access your files in local drivers from docker containers, any changes you make will disappear when you start this container next time. =-v /path/to/your/shared/driver:/path/you/want/to/mount= is the command of mount. If you want to mount more shared drivers, you just need to add another =-v= option and value. I really recommend you mount at least two shared drivers, one for =~/.emacs.d/= , and another for data storage.
 
 The parameter and value =--display xxx.xxx.xxx.xxx:0.0= can start Emacs with X windows, the former half part should be replaced with your IP.
+
+* Known Issues
+
+- Due to the permission of shared drivers, the public key and private key cannot be accessed when you git push your project to github.com.
